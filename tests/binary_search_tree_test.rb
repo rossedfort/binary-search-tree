@@ -13,9 +13,7 @@ require 'minitest/emoji'
 require './lib/binary_search_tree'
 
 class BinarySearchTreeTests < Minitest::Test
-
   def test_make_a_new_binary_search_tree
     assert BinarySearchTree.new
   end
-
 end
