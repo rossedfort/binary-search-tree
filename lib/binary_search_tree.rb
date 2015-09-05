@@ -12,16 +12,32 @@ attr_accessor :head
     @head == NullNode::DEFAULT
   end
 
-  def insert(value, current = @head)
-
+  def insert(data, current = @head)
+    if empty?
+      @head = Node.new(data)
+    else new_node = Node.new(data)
+      if new_node.data < current.data && current.left == NullNode::DEFAULT
+        current.left = new_node
+      elsif new_node.data > current.data && current.right == NullNode::DEFAULT
+        current.right = new_node
+      elsif new_node.data < current.data
+      current = current.left
+      insert(data, current)
+      else
+      current = current.right
+      insert(data, current)
+      end
+    end
+    self
   end
+
+#   def include?(data, current = @head)
+#     if empty?
+#       false
+#     else
+#       if
+#       end
+#     end
+
 end
-
-
-# bst.insert("d")
-#   bst.insert.left("b")
-#     bst.insert.left.left("a")
-#     bst.insert.left.right("c")
-#   bst.insert.right("f")
-#     bst.insert.left.right("e")
-#     bst.insert.right.right("g")
+    # BinarySearchTree.new.insert("d").insert("b").insert("a").insert("c").insert("f").insert("e").insert("g")
