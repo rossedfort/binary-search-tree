@@ -16,6 +16,7 @@ require './lib/node'
 
 
 class BinarySearchTreeTests < Minitest::Test
+
   def test_make_a_new_binary_search_tree
     tree = BinarySearchTree.new
     assert tree
@@ -49,10 +50,23 @@ class BinarySearchTreeTests < Minitest::Test
   end
 
   def test_depth_of_returns_the_depth_of_the_element_in_the_tree
+    skip
     tree = BinarySearchTree.new
-    tree.insert("d")
-    tree.insert("b")
+    tree.insert("d").insert("b")
     assert_equal 0, tree.depth_of("d")
-    assert_equal 1, tree.depth_of("b").count
+    assert_equal 1, tree.depth_of("b")
   end
+
+  def test_maximum_returns_the_data_of_the_largest_element_in_the_tree
+    tree = BinarySearchTree.new
+    tree.insert("c").insert("b").insert("a")
+    assert_equal "c", tree.maximum
+  end
+
+  def test_maximum_returns_the_data_of_the_smallest_element_in_the_tree
+    tree = BinarySearchTree.new
+    tree.insert("c").insert("b").insert("a")
+    assert_equal "a", tree.minimum
+  end
+
 end
