@@ -27,12 +27,32 @@ class BinarySearchTreeTests < Minitest::Test
     assert_equal "d", tree.head.data
   end
 
-  def test_if_the_tree_is_nonempty_traverse_down_until_the_node_is_inserted_in_the_correct_place
+  def test_inserts_a_smaller_node_to_the_left
+    tree = BinarySearchTree.new
+    tree.insert("d").insert("b").insert("a")
+    assert_equal "b", tree.head.left.data
+    assert_equal "a", tree.head.left.left.data
+  end
+
+  def test_inserts_a_larer_node_to_the_right
+    tree = BinarySearchTree.new
+    tree.insert("d").insert("f").insert("g")
+    assert_equal "f", tree.head.right.data
+    assert_equal "g", tree.head.right.right.data
+  end
+
+  def test_include_returns_true_for_an_element_in_the_tree
+    tree = BinarySearchTree.new
+    tree.insert("d").insert("b").insert("a")
+    assert_equal true, tree.include?("a")
+    assert_equal false, tree.include?("c")
+  end
+
+  def test_depth_of_returns_the_depth_of_the_element_in_the_tree
     tree = BinarySearchTree.new
     tree.insert("d")
     tree.insert("b")
-    tree.insert("a")
-    assert_equal "b", tree.head.left.data
-    assert_equal "a", tree.head.left.left.data
+    assert_equal 0, tree.depth_of("d")
+    assert_equal 1, tree.depth_of("b").count
   end
 end
