@@ -1,34 +1,34 @@
-require_relative 'node'       # => true
-require_relative 'null_node'  # => false
+require_relative 'node'
+require_relative 'null_node'
 
 class BinarySearchTree
-attr_accessor :head     # => nil
+attr_accessor :head
 
   def initialize(head = NullNode::DEFAULT)
-    @head = head                            # => #<NullNode:0x007faf1a841720>
+    @head = head
   end
 
   def empty?
-    @head == NullNode::DEFAULT  # => true, false, false, false, false
+    @head == NullNode::DEFAULT
   end
 
   def insert(data, current = @head)
-    if empty?                                                                   # => true, false, false, false
-      @head = Node.new(data)                                                    # => #<Node:0x007faf1b80ab48 @data="d", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>
-    else new_node = Node.new(data)                                              # => #<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b809568 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>
-      if new_node.data < current.data && current.left == NullNode::DEFAULT      # => true, false, true
-        current.left = new_node                                                 # => #<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>
-      elsif new_node.data > current.data && current.right == NullNode::DEFAULT  # => false
+    if empty?
+      @head = Node.new(data)
+    else new_node = Node.new(data)
+      if new_node.data < current.data && current.left == NullNode::DEFAULT
+        current.left = new_node
+      elsif new_node.data > current.data && current.right == NullNode::DEFAULT
         current.right = new_node
-      elsif new_node.data < current.data                                        # => true
-      current = current.left                                                    # => #<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>
-      insert(data, current)                                                     # => #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>>
+      elsif new_node.data < current.data
+      current = current.left
+      insert(data, current)
       else
       current = current.right
       insert(data, current)
-      end                                                                       # => #<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>>
-    end                                                                         # => #<Node:0x007faf1b80ab48 @data="d", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>>
-    self                                                                        # => #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>>, #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>>, #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>, @right=#<NullNode:0x007faf1a841720>>>, #<BinarySearchTree:0x007faf1b80b0e8 @head=#<Node:0x007faf1b80ab48 @data="d", @left=#<Node:0x007faf1b80a300 @data="b", @left=#<Node:0x007faf1b808e38 @data="a", @left=#<NullNode:0x007faf1a841720>, @right=#<NullNode:0x007f...
+      end
+    end
+    self
   end
 
   def include?(data, current = @head)
@@ -75,13 +75,13 @@ attr_accessor :head     # => nil
   end
 
   def maximum(current = @head)
-    if empty?                                   # => false
+    if empty?
       return "Empty tree!"
     else
-      until current.right == NullNode::DEFAULT  # => true
+      until current.right == NullNode::DEFAULT
         current = current.right
-      end                                       # => nil
-      current.data                              # => "d"
+      end
+      current.data
     end
   end
 
