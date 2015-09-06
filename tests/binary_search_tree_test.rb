@@ -1,13 +1,3 @@
-# make a new binary search tree
-#   tree should be empty
-# -----------------------------
-# make a null node
-#   the null node is always pointed at from left and right by all nodes without a left or right node
-# ------------------------------------------------------
-# make a new null node and insert it into the tree
-#   if the tree is empty it makes the new node the head
-#   if the tree is nonempty traverse down the tree until the node is in the correct place based on comparison with other nodes
-#
 require 'minitest/autorun'
 require 'minitest/emoji'
 require './lib/binary_search_tree'
@@ -50,7 +40,6 @@ class BinarySearchTreeTests < Minitest::Test
   end
 
   def test_depth_of_returns_the_depth_of_the_element_in_the_tree
-    skip
     tree = BinarySearchTree.new
     tree.insert("d").insert("b")
     assert_equal 0, tree.depth_of("d")
@@ -67,6 +56,13 @@ class BinarySearchTreeTests < Minitest::Test
     tree = BinarySearchTree.new
     tree.insert("c").insert("b").insert("a")
     assert_equal "a", tree.minimum
+  end
+
+  def test_delete_removes_the_node_with_the_desired_value_from_the_tree
+    tree = BinarySearchTree.new
+    tree.insert("d").insert("b").insert("f")
+    tree.delete("f")
+    assert_equal false, tree.include?("f")
   end
 
 end

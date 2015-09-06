@@ -35,7 +35,7 @@ attr_accessor :head
     if empty?
       false
     else
-      if current == NullNode::DEFAULT
+      if current == NullNode::DEFAULT || current.data == NullNode::DEFAULT
         return false
       elsif current.data == data
         return true
@@ -67,7 +67,6 @@ attr_accessor :head
           count += 1
         else
           break
-          count
         end
       end
     end
@@ -94,6 +93,39 @@ attr_accessor :head
       end
       current.data
     end
+  end
+
+  def delete(data, current = @head)
+    if include?(data) == false
+      puts "That node doesn't exist!"
+    else
+      while include?(data) == true
+        if current == NullNode::DEFAULT
+          break
+        elsif current.data == data
+          if current.right == NullNode::DEFAULT && current.left == NullNode::DEFAULT
+            current.data = NullNode::DEFAULT
+          else
+            current.data = current.right.data
+            current.right = NullNode::DEFAULT
+          end
+        elsif data < current.data
+          current = current.left
+          delete(data, current)
+        else
+          current = current.right
+          delete(data,current)
+        end
+      end
+    end
+  end
+
+  def traverse
+    
+  end
+
+  def sort
+
   end
 
 end
