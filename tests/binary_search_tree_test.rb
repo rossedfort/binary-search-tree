@@ -41,9 +41,10 @@ class BinarySearchTreeTests < Minitest::Test
 
   def test_depth_of_returns_the_depth_of_the_element_in_the_tree
     tree = BinarySearchTree.new
-    tree.insert("d").insert("b")
+    tree.insert("d").insert("b").insert("f")
     assert_equal 0, tree.depth_of("d")
     assert_equal 1, tree.depth_of("b")
+    assert_equal 1, tree.depth_of("f")
   end
 
   def test_maximum_returns_the_data_of_the_largest_element_in_the_tree
@@ -63,6 +64,14 @@ class BinarySearchTreeTests < Minitest::Test
     tree.insert("d").insert("b").insert("f")
     tree.delete("f")
     assert_equal false, tree.include?("f")
+    tree.delete("b")
+    assert_equal false, tree.include?("b")
+  end
+
+  def test_sort_returns_a_sorted_array_of_the_node_data_in_the_tree
+    tree = BinarySearchTree.new
+    tree.insert("d").insert("b").insert("f")
+    assert_equal ["b","d","f"], tree.sort
   end
 
 end
