@@ -1,45 +1,45 @@
-require_relative 'node'       # => true
-require_relative 'null_node'  # => false
+require_relative 'node'
+require_relative 'null_node'
 
 class BinarySearchTree
-attr_accessor :head     # => nil
+  attr_accessor :head
 
   def initialize(head = NullNode::DEFAULT)
-    @head = head                            # => #<NullNode:0x007fba5b028218>
-    @sorted_array = []                      # => []
+    @head = head
+    @sorted_array = []
   end
 
   def empty?
-    @head == NullNode::DEFAULT  # => true, false, false, false, false
+    @head == NullNode::DEFAULT
   end
 
   def insert(data, current = @head)
-    if empty?                                                                   # => true, false, false
-      @head = Node.new(data)                                                    # => #<Node:0x007fba5b022fc0 @data="d", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-    else new_node = Node.new(data)                                              # => #<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, #<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-      if new_node.data < current.data && current.left == NullNode::DEFAULT      # => true, false
-        current.left = new_node                                                 # => #<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-      elsif new_node.data > current.data && current.right == NullNode::DEFAULT  # => true
-        current.right = new_node                                                # => #<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-      elsif new_node.data < current.data
-      current = current.left
-      insert(data, current)
-      else
-      current = current.right
-      insert(data, current)
-      end                                                                       # => #<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, #<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-    end                                                                         # => #<Node:0x007fba5b022fc0 @data="d", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, #<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, #<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-    self                                                                        # => #<BinarySearchTree:0x007fba5b023510 @head=#<Node:0x007fba5b022fc0 @data="d", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, @sorted_array=[]>, #<BinarySearchTree:0x007fba5b023510 @head=#<Node:0x007fba5b022fc0 @data="d", @left=#<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, @right=#<NullNode:0x007fba5b028218>>, @sorted_array=[]>, #<BinarySearchTree:0x007fba5b023510 @head=#<Node:0x007fba5b022fc0 @data="d", @left=#<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, @right=#<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>>, @sorted_array=[]>
+    if empty?
+      @head = Node.new(data)
+    else new_node = Node.new(data)
+         if new_node.data < current.data && current.left == NullNode::DEFAULT
+           current.left = new_node
+         elsif new_node.data > current.data && current.right == NullNode::DEFAULT
+           current.right = new_node
+         elsif new_node.data < current.data
+           current = current.left
+           insert(data, current)
+         else
+           current = current.right
+           insert(data, current)
+         end
+    end
+    self
   end
 
   def include?(data, current = @head)
-    if empty?                                                               # => false
+    if empty?
       false
     else
-      if current == NullNode::DEFAULT || current.data == NullNode::DEFAULT  # => false
+      if current == NullNode::DEFAULT || current.data == NullNode::DEFAULT
         return false
-      elsif current.data == data                                            # => true
-        return true                                                         # => true
+      elsif current.data == data
+        return true
       elsif data < current.data
         current = current.left
         include?(data, current)
@@ -51,44 +51,40 @@ attr_accessor :head     # => nil
   end
 
   def depth_of(data, current = @head, count = 0)
-    if empty?                                                                        # => false
-      return "Empty tree!"
+    if empty?
+      return 'Empty tree!'
     else
-      while current.right != NullNode::DEFAULT && current.left != NullNode::DEFAULT  # => true, false
-        if data < current.data                                                       # => false
+      while current.right != NullNode::DEFAULT && current.left != NullNode::DEFAULT
+        if data < current.data
           current = current.left
           include?(data, current)
           count += 1
-        elsif data > current.data                                                    # => true
-          current = current.right                                                    # => #<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>
-          include?(data, current)                                                    # => true
-          count += 1                                                                 # => 1
+        elsif data > current.data
+          current = current.right
+          include?(data, current)
+          count += 1
         else
           return count
         end
-      end                                                                            # => nil
+      end
     end
-    count                                                                            # => 1
+    count
   end
 
   def maximum(current = @head)
     if empty?
-      return "Empty tree!"
+      return 'Empty tree!'
     else
-      until current.right == NullNode::DEFAULT
-        current = current.right
-      end
+      current = current.right until current.right == NullNode::DEFAULT
       current.data
     end
   end
 
   def minimum(current = @head)
     if empty?
-      return "Empty tree!"
+      return 'Empty tree!'
     else
-      until current.left == NullNode::DEFAULT
-        current = current.left
-      end
+      current = current.left until current.left == NullNode::DEFAULT
       current.data
     end
   end
@@ -123,14 +119,32 @@ attr_accessor :head     # => nil
           delete(data, current)
         else
           current = current.right
-          delete(data,current)
+          delete(data, current)
         end
       end
     end
   end
 
+  def height
+    sort
+  end
+
+  def input_tree
+    handle = File.open('Users/rossedfort/code/binary-search-tree/data.txt')
+    handle.each_line do |l|
+      insert("#{l.chomp}")
+    end
+  end
+
+  def output_tree
+    handle = File.open('Users/rossedfort/code/binary-search-tree/output.txt', 'w')
+    sort.each do |n|
+      handle.write("#{n}\n")
+    end
+    handle.flush
+  end
 end
 
-tree = BinarySearchTree.new               # => #<BinarySearchTree:0x007fba5b023510 @head=#<NullNode:0x007fba5b028218>, @sorted_array=[]>
-tree.insert("d").insert("b").insert("f")  # => #<BinarySearchTree:0x007fba5b023510 @head=#<Node:0x007fba5b022fc0 @data="d", @left=#<Node:0x007fba5b022908 @data="b", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>, @right=#<Node:0x007fba5b021da0 @data="f", @left=#<NullNode:0x007fba5b028218>, @right=#<NullNode:0x007fba5b028218>>>, @sorted_array=[]>
-tree.depth_of("f")                        # => 1
+tree = BinarySearchTree.new
+tree.input_tree
+tree.output_tree
