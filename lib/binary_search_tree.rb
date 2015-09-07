@@ -18,23 +18,24 @@ class BinarySearchTree
     if empty?
       @head = Node.new(data)
     else new_node = Node.new(data)
-         if new_node.data < current.data && current.left == NullNode::DEFAULT
-           current.left = new_node
-         elsif new_node.data > current.data && current.right == NullNode::DEFAULT
-           current.right = new_node
-         elsif new_node.data < current.data
-           current = current.left
-           insert(data, current)
-         else
-           current = current.right
-           insert(data, current)
-         end
+      if new_node.data < current.data && current.left == NullNode::DEFAULT
+        current.left = new_node
+      elsif new_node.data > current.data && current.right == NullNode::DEFAULT
+        current.right = new_node
+      elsif new_node.data < current.data
+        current = current.left
+        insert(data, current)
+      else
+        current = current.right
+        insert(data, current)
+      end
     end
     self
   end
 
-  def include?(_data, _current = @head)
-    return false if empty?
+  def include?(data, current = @head)
+    if empty?
+      return false
     else
       if current == NullNode::DEFAULT || current.data == NullNode::DEFAULT
         return false
@@ -46,11 +47,13 @@ class BinarySearchTree
       else
         current = current.right
         include?(data, current)
+      end
     end
   end
 
-  def depth_of(_data, _current = @head, _count = 0)
-    return 'Empty tree!' if empty?
+  def depth_of(data, current = @head, count = 0)
+    if empty?
+      return 'Empty tree!'
     else
       while current.right != NullNode::DEFAULT && current.left != NullNode::DEFAULT
         if data < current.data
@@ -65,44 +68,55 @@ class BinarySearchTree
           return count
         end
       end
+    end
     count
   end
 
-  def maximum(_current = @head)
-    return 'Empty tree!' if empty?
+  def maximum(current = @head)
+    if empty?
+      return 'Empty tree!'
     else
       current = current.right until current.right == NullNode::DEFAULT
       current.data
+    end
   end
 
-  def minimum(_current = @head)
-    return 'Empty tree!' if empty?
+  def minimum(current = @head)
+    if empty?
+      return 'Empty tree!'
     else
       current = current.left until current.left == NullNode::DEFAULT
       current.data
+    end
   end
 
-  def sort(current = @head, _parent = @head, _sorted_array = @sorted_array)
-    return 'Empty tree!' if current == NullNode::DEFAULT
+  def sort(current = @head, parent = @head, sorted_array = @sorted_array)
+    if current == NullNode::DEFAULT
+      return 'Empty tree!'
     else
       sort(current.left, parent)
       sorted_array << current.data
       sort(current.right, parent)
       sorted_array
+    end
   end
 
-  def delete(data, _current = @head)
-    return 'That node doesnt exist!' if include?(data) == false
+  def delete(data, current = @head)
+    if include?(data) == false
+      return 'That node doesnt exist!'
     else
       while include?(data) == true
         if current == NullNode::DEFAULT
           break
         elsif current.data == data
-          if current.right == NullNode::DEFAULT && current.left == NullNode::DEFAULT
-            current.data = NullNode::DEFAULT
-          else
+          if current.left == NullNode::DEFAULT && current.right != NullNode::DEFAULT
             current.data = current.right.data
             current.right = NullNode::DEFAULT
+          elsif current.right == NullNode::DEFAULT && current.left != NullNode::DEFAULT
+            current.data = current.left.data
+            current.left = NullNode::DEFAULT
+          else
+            current.data = NullNode::DEFAULT
           end
         elsif data < current.data
           current = current.left
@@ -112,22 +126,24 @@ class BinarySearchTree
           delete(data, current)
         end
       end
+    end
   end
 
   def maximum_height
     depth_of(maximum)
   end
 
-  def num_of_leaves(current = @head, _leaves = @leaves)
-    return 0 if current == NullNode::DEFAULT
+  def num_of_leaves(current = @head, leaves = @leaves)
+    if current == NullNode::DEFAULT
+      return 0
     else
       if current.right == NullNode::DEFAULT && current.left == NullNode::DEFAULT
-        leaves << current.right
-        leaves << current.right
+        leaves << current
       end
       num_of_leaves(current.left, leaves)
       num_of_leaves(current.right, leaves)
-      leaves.count
+    end
+    leaves.count
   end
 
   def input_tree
@@ -139,12 +155,7 @@ class BinarySearchTree
 
   def output_tree
     handle = File.open('output.txt', 'w')
-    handle.write("The tree is empty: #{empty?}\n")
-    handle.write("\nThere are #{num_of_leaves} leaves\n")
-    handle.write("\nThe maximum element is #{maximum}\n")
-    handle.write("\nThe minimum element is #{minimum}\n")
-    handle.write("\nThe tree includes the letter e: #{include?('e')}\n")
-    handle.write("\nThe sorted elements:\n")
+    handle.write("The sorted elements:\n")
     sort.each do |n|
       handle.write("#{n}\n")
     end

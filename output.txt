@@ -1,13 +1,3 @@
-The tree is empty: false
-
-There are 8 leaves
-
-The maximum element is g
-
-The minimum element is a
-
-The tree includes the letter e: true
-
 The sorted elements:
 a
 b
