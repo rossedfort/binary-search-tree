@@ -33,9 +33,8 @@ class BinarySearchTree
     self
   end
 
-  def include?(data, current = @head)
-    if empty?
-      false
+  def include?(_data, _current = @head)
+    return false if empty?
     else
       if current == NullNode::DEFAULT || current.data == NullNode::DEFAULT
         return false
@@ -47,13 +46,11 @@ class BinarySearchTree
       else
         current = current.right
         include?(data, current)
-      end
     end
   end
 
-  def depth_of(data, current = @head, count = 0)
-    if empty?
-      return 'Empty tree!'
+  def depth_of(_data, _current = @head, _count = 0)
+    return 'Empty tree!' if empty?
     else
       while current.right != NullNode::DEFAULT && current.left != NullNode::DEFAULT
         if data < current.data
@@ -68,42 +65,34 @@ class BinarySearchTree
           return count
         end
       end
-    end
     count
   end
 
-  def maximum(current = @head)
-    if empty?
-      return 'Empty tree!'
+  def maximum(_current = @head)
+    return 'Empty tree!' if empty?
     else
       current = current.right until current.right == NullNode::DEFAULT
       current.data
-    end
   end
 
-  def minimum(current = @head)
-    if empty?
-      return 'Empty tree!'
+  def minimum(_current = @head)
+    return 'Empty tree!' if empty?
     else
       current = current.left until current.left == NullNode::DEFAULT
       current.data
-    end
   end
 
-  def sort(current = @head, parent = @head, sorted_array = @sorted_array)
-    if current == NullNode::DEFAULT
-      return 'Empty tree!'
+  def sort(current = @head, _parent = @head, _sorted_array = @sorted_array)
+    return 'Empty tree!' if current == NullNode::DEFAULT
     else
       sort(current.left, parent)
       sorted_array << current.data
       sort(current.right, parent)
-    end
-    sorted_array
+      sorted_array
   end
 
-  def delete(data, current = @head)
-    if include?(data) == false
-      return 'That node doesnt exist!'
+  def delete(data, _current = @head)
+    return 'That node doesnt exist!' if include?(data) == false
     else
       while include?(data) == true
         if current == NullNode::DEFAULT
@@ -123,16 +112,14 @@ class BinarySearchTree
           delete(data, current)
         end
       end
-    end
   end
 
   def maximum_height
     depth_of(maximum)
   end
 
-  def num_of_leaves(current = @head, leaves = @leaves)
-    if current == NullNode::DEFAULT
-      return 0
+  def num_of_leaves(current = @head, _leaves = @leaves)
+    return 0 if current == NullNode::DEFAULT
     else
       if current.right == NullNode::DEFAULT && current.left == NullNode::DEFAULT
         leaves << current.right
@@ -140,8 +127,7 @@ class BinarySearchTree
       end
       num_of_leaves(current.left, leaves)
       num_of_leaves(current.right, leaves)
-      end
-    leaves.count
+      leaves.count
   end
 
   def input_tree
