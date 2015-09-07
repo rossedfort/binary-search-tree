@@ -7,6 +7,7 @@ class BinarySearchTree
   def initialize(head = NullNode::DEFAULT)
     @head = head
     @sorted_array = []
+    @leaves = []
   end
 
   def empty?
@@ -91,7 +92,7 @@ class BinarySearchTree
 
   def sort(current = @head, parent = @head, sorted_array = @sorted_array)
     if current == NullNode::DEFAULT
-      return
+      return 'Empty tree!'
     else
       sort(current.left, parent)
       sorted_array << current.data
@@ -102,7 +103,7 @@ class BinarySearchTree
 
   def delete(data, current = @head)
     if include?(data) == false
-      puts "That node doesn't exist!"
+      return 'That node doesnt exist!'
     else
       while include?(data) == true
         if current == NullNode::DEFAULT
@@ -125,23 +126,42 @@ class BinarySearchTree
     end
   end
 
-  def height
-    sort
+  def maximum_height
+    depth_of(maximum)
+  end
+
+  def num_of_leaves(current = @head, leaves = @leaves)
+    if current == NullNode::DEFAULT
+      return 0
+    else
+      if current.right == NullNode::DEFAULT && current.left == NullNode::DEFAULT
+        leaves << current.right
+        leaves << current.right
+      end
+      num_of_leaves(current.left, leaves)
+      num_of_leaves(current.right, leaves)
+      end
+    leaves.count
   end
 
   def input_tree
-    handle = File.open('Users/rossedfort/code/binary-search-tree/data.txt')
+    handle = File.open('data.txt')
     handle.each_line do |l|
       insert("#{l.chomp}")
     end
   end
 
   def output_tree
-    handle = File.open('Users/rossedfort/code/binary-search-tree/output.txt', 'w')
+    handle = File.open('output.txt', 'w')
+    handle.write("The tree is empty: #{empty?}\n")
+    handle.write("\nThere are #{num_of_leaves} leaves\n")
+    handle.write("\nThe maximum element is #{maximum}\n")
+    handle.write("\nThe minimum element is #{minimum}\n")
+    handle.write("\nThe tree includes the letter e: #{include?('e')}\n")
+    handle.write("\nThe sorted elements:\n")
     sort.each do |n|
       handle.write("#{n}\n")
     end
-    handle.flush
   end
 end
 

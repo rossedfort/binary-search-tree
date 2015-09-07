@@ -88,12 +88,17 @@ class BinarySearchTreeTests < Minitest::Test
 
   def test_delete_doesnt_blow_up_when_the_tree_is_empty
     tree = BinarySearchTree.new
-    assert_equal "That node doesn't exist!", tree.delete('a')
+    assert_equal 'That node doesnt exist!', tree.delete('a')
   end
 
   def test_sort_returns_a_sorted_array_of_the_node_data_in_the_tree
     tree = BinarySearchTree.new
     tree.insert('d').insert('b').insert('f')
-    assert_equal %w(b d f), tree.sort
+    assert_equal ["b","d","f"], tree.sort
+  end
+
+  def test_sort_doesnt_blow_up_when_the_tree_is_empty
+    tree = BinarySearchTree.new
+    assert_equal 'Empty tree!', tree.sort
   end
 end
