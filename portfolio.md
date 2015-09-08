@@ -1,9 +1,8 @@
+# Ross Edfort
 __________________________
-Ross Edfort
+## Work
 __________________________
-Work
-__________________________
-Sorting-Suite
+### Sorting-Suite
 
 * Evaluator: Mike
   * Notes: Good testing, some long methods.
@@ -14,7 +13,7 @@ Sorting-Suite
     * Organization: 3
 
 __________________________
-Linked List
+### Linked List
 
 * Evaluator: Sean
   * Scores:
