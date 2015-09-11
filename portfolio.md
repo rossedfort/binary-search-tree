@@ -1,38 +1,38 @@
-      Ross Edfort - Module 4 Portfolio
-      Individual
+      #Ross Edfort - Module 4 Portfolio
+      ##Individual
 
-      Your Mission
+      ###Your Mission
 
-      This module, I set out to get better every day through consistent practice.
+      "This module, I set out to get better every day through consistent practice.
       I wanted my projects to reflect on my effort. I also wanted to attend a Meetup
-      or other activity outside of Turing. 
+      or other activity outside of Turing."
 
-      End of Module Assessment
+      ###End of Module Assessment
 
-      (Notes & scores from your assessment rubric)
+      "(Notes & scores from your assessment rubric)"
 
-      Attendance
+      ###Attendance
 
-      (Summary of any missed time 1/2 day or more)
+      "(Summary of any missed time 1/2 day or more)"
 
-      Work
+      ###Work
 
-      (Intro)
+      "(Intro)"
 
-      (Sorting Suite)
+      ####Sorting Suite
 
       GitHub URL
       Original Assignment
       (description)
 
-      (Good testing, some long methods.
-)
+      "Good testing, some long methods."
 
-      (* Scores:
+
+      * Scores:
         * Functional Expectations: 3
         * Testing: 3
         * Ruby Style: 3
-        * Organization: 3)
+        * Organization: 3
 
       (Linked List)
 
