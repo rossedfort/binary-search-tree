@@ -164,4 +164,5 @@ end
 
 tree = BinarySearchTree.new
 tree.input_tree
+tree.delete('c')
 tree.output_tree

@@ -1,9 +1,11 @@
-      (Ross Edfort) - (M1/M2/M3/M4) Portfolio
+      Ross Edfort - Module 4 Portfolio
       Individual
 
       Your Mission
 
-      (What did you set out to accomplish this module?)
+      This module, I set out to get better every day through consistent practice.
+      I wanted my projects to reflect on my effort. I also wanted to attend a Meetup
+      or other activity outside of Turing. 
 
       End of Module Assessment
 

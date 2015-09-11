@@ -1,7 +1,7 @@
 The sorted elements:
 a
 b
-c
+#<NullNode:0x007fa9f3a9ff20>
 d
 e
 f
